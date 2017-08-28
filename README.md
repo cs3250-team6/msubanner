@@ -5,4 +5,5 @@ Team 6:
 Tatiana Smith,
 Nicholas (Cole) Van Keulen,
 Bobby Wettig,
-Andrew Roberts
+Andrew Roberts,
+Jerrad Vitatoe
