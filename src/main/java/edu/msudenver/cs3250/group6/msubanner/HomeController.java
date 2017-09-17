@@ -15,4 +15,9 @@ class HomeController {
   String index() {
     return "index";
   }
+  
+  @RequestMapping("/adduserform")
+  String addUserForm() {
+    return "adduserform";
+  }
 }
