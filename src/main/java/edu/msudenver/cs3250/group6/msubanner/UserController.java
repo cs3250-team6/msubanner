@@ -43,7 +43,7 @@ public class UserController{
 	}
 	
 	@RequestMapping("/users/{id}") // {id} is wildcard for any id passed in
-	public User getUser(@PathVariable String id) { //@PathVariable indicates use of wildcard above	
+	public User getUser(@PathVariable long id) { //@PathVariable indicates use of wildcard above
 		return userService.getUser(id);
 	}
 	
@@ -54,13 +54,13 @@ public class UserController{
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/users/{id}")
-	public void updateUser(@RequestBody User user, @PathVariable String id) { // take request body, turn into User instance and pass to addUser()
+	public void updateUser(@RequestBody User user, @PathVariable long id) { // take request body, turn into User instance and pass to addUser()
 		// POST body should contain object being sent
 		userService.updateUser(id, user);	
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/users/{id}")// {id} is wildcard for any id passed in
-	public void deleteUser(@PathVariable String id) { //@PathVariable indicates use of wildcard above	
+	public void deleteUser(@PathVariable long id) { //@PathVariable indicates use of wildcard above
 		userService.deleteUser(id);
 	}
 }

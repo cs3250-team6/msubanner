@@ -21,7 +21,7 @@ public class UserService {
 		return Users;
 	}
 	
-	public User getUser(String id) {
+	public User getUser(long id) {
 		// iterates on Users List
 		// return Users.stream().filter(t -> t.getId().equals(id)).findFirst().get(); // lambda checks that User id equals id passed in 
 		return UserRepository.findOne(id);
@@ -31,11 +31,11 @@ public class UserService {
 		UserRepository.save(user); // out of the box save method to db
 	}
 
-	public void updateUser(String id, User user) {
+	public void updateUser(long id, User user) {
 		UserRepository.save(user);
 	}
 
-	public void deleteUser(String id) {
+	public void deleteUser(long id) {
 		UserRepository.delete(id);
 	}
 }
