@@ -42,25 +42,30 @@ public class UserController{
 		return userService.getAllUsers();
 	}
 	
-	@RequestMapping("/users/{id}") // {id} is wildcard for any id passed in
-	public User getUser(@PathVariable long id) { //@PathVariable indicates use of wildcard above
+	// {id} is wildcard for any id passed in
+	@RequestMapping("/users/getuser/{id}")
+	//@PathVariable indicates use of wildcard above
+	public User getUser(@PathVariable long id) { 
 		return userService.getUser(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/users")
-	public void addUser(@RequestBody User user) { // take request body, turn into User instance and pass to addUser()
+	@RequestMapping(method=RequestMethod.POST, value="/users/adduser")
+	// take request body, turn into User instance and pass to addUser()
+	public void addUser(@RequestBody User user) { 
 		// POST body should contain object being sent
 		userService.addUser(user);	
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/users/{id}")
+	@RequestMapping(method=RequestMethod.PUT, value="/users/updateuser/{id}")
 	public void updateUser(@RequestBody User user, @PathVariable long id) { // take request body, turn into User instance and pass to addUser()
 		// POST body should contain object being sent
 		userService.updateUser(id, user);	
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/users/{id}")// {id} is wildcard for any id passed in
-	public void deleteUser(@PathVariable long id) { //@PathVariable indicates use of wildcard above
+	// {id} is wildcard for any id passed in
+	@RequestMapping(method=RequestMethod.DELETE, value="/users/deleteuser/{id}")
+	//@PathVariable indicates use of wildcard above
+	public void deleteUser(@PathVariable long id) { 
 		userService.deleteUser(id);
 	}
 }

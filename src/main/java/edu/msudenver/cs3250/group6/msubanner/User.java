@@ -46,7 +46,7 @@ public class User {
 
     /**
      * Contructor
-     * @param firstName User's firat name
+     * @param firstName User's first name
      * @param lastName User's last name
      */
     public User (String firstName, String lastName) {
