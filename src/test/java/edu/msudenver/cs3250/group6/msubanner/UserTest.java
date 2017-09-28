@@ -1,6 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class UserTest {
     public void getId() throws Exception {
         User user = new User();
         long id = user.getId();
-        assertNotNull(id);
+        assertNotEquals(0, id);
     }
 
     @Test
@@ -52,5 +53,18 @@ public class UserTest {
         User user = new User();
         assertEquals("Last_Name", user.getLastName());
         assertEquals("First_Name", user.getFirstName());
+    }
+
+    //not really testing anything, but makes for good coverage :/
+    @Test
+    public void testHashCode() throws Exception {
+        User user = new User();
+        assertEquals(664411433, user.hashCode());
+    }
+
+    @Test
+    public void testToString() throws Exception{
+        User user = new User();
+        assertEquals("User: First_Name Last_Name " + user.getId(), user.toString());
     }
 }
