@@ -81,7 +81,7 @@ public class SectionTest {
         User prof = new User("Mr.", "Meseeks");
         Section section = new Section(course, prof);
         String out = "Section{" + "id=" + section.getId() + ", Course="
-                + /* course.toString() + */ ", professor:" + prof.toString()
+                + course.toString() + ", professor:" + prof.toString()
                 + '}';
         assertEquals(out, section.toString());
     }

@@ -143,7 +143,7 @@ public class Section {
     @Override
     public String toString() {
         return "Section{" + "id=" + myId + ", Course="
-                + /* course.toString() + */ ", professor:"
+                + myCourse.toString() + ", professor:"
                 + myProfessor.toString() + '}';
     }
 }

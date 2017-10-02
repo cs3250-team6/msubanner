@@ -1,5 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import javax.persistence.*;
 
 /**
@@ -14,7 +16,7 @@ public class Course {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long myId;
 
     //todo: Add field for department
 
@@ -22,20 +24,20 @@ public class Course {
      * Title of the course
      */
     @Column
-    private String title;
+    private String myTitle;
 
     /**
      * Description of the course.
      */
-    private String description;
+    private String myDescription;
 
     /**
      * Default constructor, initializes fields with default values
      * Directions for use: Do NOT
      */
     public Course() {
-        this.title = "Empty title";
-        this.description = "No description available";
+        this.myTitle = "Empty title";
+        this.myDescription = "No description available";
     }
 
     /**
@@ -44,8 +46,13 @@ public class Course {
      * @param description Course description
      */
     public Course(String title, String description) {
-        this.title = title;
-        this.description = description;
+        if (title.equals("") || title.equals(" "))
+            this.myTitle = "Empty title";
+        else this.myTitle = title;
+
+        if (description.equals("") || description.equals(" "))
+            this.myDescription = "No description available";
+        else this.myDescription = description;
     }
 
     /**
@@ -53,7 +60,7 @@ public class Course {
      * @param id New id for the course
      */
     public void setId(long id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -61,15 +68,18 @@ public class Course {
      * @return id number of the course
      */
     public long getId() {
-        return id;
+        return myId;
     }
 
     /**
      * Sets the title of the course.
      * @param title New title of the course
+     * @throws IllegalArgumentException if new title is blank
      */
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (title.equals("") || title.equals(" "))
+            throw new IllegalArgumentException("Ttile cannot be blank!");
+        this.myTitle = title;
     }
 
     /**
@@ -77,7 +87,7 @@ public class Course {
      * @return Title of the course
      */
     public String getTitle() {
-        return title;
+        return myTitle;
     }
 
     /**
@@ -85,7 +95,9 @@ public class Course {
      * @param description New description of the course
      */
     public void setDescription(String description) {
-        this.description = description;
+        if (description.equals("") || description.equals(" "))
+            throw new IllegalArgumentException("Description cannot be blank!");
+        this.myDescription = description;
     }
 
     /**
@@ -93,7 +105,13 @@ public class Course {
      * @return Description of the course
      */
     public String getDescription() {
-        return description;
+        return myDescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" + "Id=" + myId + ", Title= "
+                + myTitle + ", Description= " + myDescription + "}";
     }
 
     @Override

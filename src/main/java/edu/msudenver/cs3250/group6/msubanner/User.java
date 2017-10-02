@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.concurrent.Callable;
 
 /**
  * Persistent User class.
@@ -26,6 +27,7 @@ public class User {
     /** User's last name. */
     @Column
     private String myLastName;
+
 
     /** Constant multiplier for hash method. */
     private static final int HASH_MULTIPLIER = 31;

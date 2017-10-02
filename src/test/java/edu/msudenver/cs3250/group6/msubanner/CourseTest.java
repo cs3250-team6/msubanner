@@ -5,33 +5,62 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CourseTest {
-    @Test
-    public void setId() throws Exception {
 
+    // setId should never be used, so this is fine
+    @Test
+    public void setIdSetIdTest() {
+        Course course = new Course();
+        course.setId(-1);
+        assertEquals(-1, course.getId());
     }
 
     @Test
-    public void getId() throws Exception {
+    public void setTitleGetTitleTest() {
+        Course course = new Course();
+        course.setTitle("Test title");
+        assertEquals("Test title", course.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setDescriptionGetDescriptionTest() {
+        Course course = new Course();
+        course.setDescription("Test description");
+        assertEquals("Test description", course.getDescription());
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void equals() {
+        Course course = new Course("Test title", "Test description");
+        Course course2 = course;
+        assertEquals(course, course2);
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void defaultConstructorTest() {
+        Course course = new Course();
+        assertEquals("Empty title", course.getTitle());
+        assertEquals("No description available", course.getDescription());
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void emptyStringInConstructorTest() {
+        Course course = new Course("", "");
+        assertEquals("Empty title", course.getTitle());
+        assertEquals("No description available", course.getDescription());
     }
 
     @Test
-    public void equals() throws Exception {
+    public void constructorTest() {
+        Course course = new Course("Test title", "Test description");
+        assertEquals("Test title", course.getTitle());
+        assertEquals("Test description", course.getDescription());
+    }
+
+    @Test
+    public void toStringTest() {
+        Course course = new Course("Test title", "Test description");
+        assertEquals("Course{Id=0, Title= Test title, Description= "
+                + "Test description}", course.toString());
     }
 
 }
