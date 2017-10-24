@@ -2,7 +2,9 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
+import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,13 @@ class HomeController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Autowired
+    private BuildingService buildingService;
+
     /**
      * Maps the home page to index.html.
      *
@@ -109,8 +118,11 @@ class HomeController {
      * @return the add room form string
      */
     @RequestMapping("/rooms/addroom")
-    String addRoomForm() {
-        return "addroomform";
+    ModelAndView addRoomForm() {
+        ModelAndView mav = new ModelAndView("addroomform");
+        mav.addObject("allbuildings", buildingService.getAllBuildings());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
 }

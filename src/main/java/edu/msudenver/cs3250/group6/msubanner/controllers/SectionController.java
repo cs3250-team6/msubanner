@@ -95,4 +95,14 @@ public class SectionController {
         sectionService.deleteSection(id);
         return "redirect:/sections/";
     }
+
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/sections/deletesection/{id}")
+    public ModelAndView deleteSectionRedirect(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("sections");
+        mav.addObject("allsections", sectionService.getAllSections());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
 }

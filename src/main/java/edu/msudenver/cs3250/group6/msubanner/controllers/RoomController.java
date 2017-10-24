@@ -1,6 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class RoomController {
      * @return the room
      */
     @RequestMapping(method = RequestMethod.POST, value = "/rooms/addroom")
-    public ModelAndView addRoom(@RequestParam final int roomNumber, int roomCapacity) {
+    public ModelAndView addRoom(@RequestParam final int roomNumber, int roomCapacity, Building building) {
         Room room = new Room(roomNumber, roomCapacity);
         roomService.addRoom(room);
         ModelAndView mav = new ModelAndView("showroom");
@@ -66,7 +67,7 @@ public class RoomController {
     }
 
     /**
-     * Updates a course.
+     * Updates a room.
      *
      * @param room the room to be updated
      * @param id the room's id
@@ -79,7 +80,7 @@ public class RoomController {
     }
 
     /**
-     * Deletes a course.
+     * Deletes a room.
      *
      * @param id the course's id
      */
