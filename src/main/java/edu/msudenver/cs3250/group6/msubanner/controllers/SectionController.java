@@ -74,14 +74,33 @@ public class SectionController {
     /**
      * Updates a section.
      *
-     * @param section the section to be updated
      * @param id the section's id
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/sections/updatesection/{id}")
-    public void updateSection(@RequestBody final Section section,
-            @PathVariable final long id) {
+    public ModelAndView updateSection(@RequestParam final Course course, final User professor,
+            @PathVariable final String id) {
+        Section section = sectionService.getSection(id);
+        section.setCourse(course);
+        section.setProfessor(professor);
         sectionService.updateSection(section);
+        ModelAndView mav = new ModelAndView("showsection");
+        mav.addObject("section", section);
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    /**
+     * Maps to the add section form.
+     * @param id the id of the section
+     * @return ModelAndView containing the selected section
+     */
+    @RequestMapping("/sections/editsection/{id}")
+    public ModelAndView editSection(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("editsectionform");
+        mav.addObject("section", sectionService.getSection(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**

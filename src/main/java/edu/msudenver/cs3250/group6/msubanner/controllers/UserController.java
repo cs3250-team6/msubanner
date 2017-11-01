@@ -88,21 +88,21 @@ public class UserController {
     /**
      * Updates an existing user.
      *
-     * @param user the user to be updated
      * @param id the user's id
      * @return void
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/users/updateuser/{id}")
-    public ResponseEntity<Void> updateUser(@RequestBody final User user,
+    public ModelAndView updateUser(@RequestParam final String firstName, final String lastName,
             @PathVariable final String id) {
-        User existingUser = userService.getUser(id);
-        if (existingUser == null) {
-            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-        } else {
-            userService.updateUser(user);
-            return new ResponseEntity<Void>(HttpStatus.OK);
-        }
+        User user = userService.getUser(id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userService.updateUser(user);
+        ModelAndView mav = new ModelAndView("showuser");
+        mav.addObject("user", userService.getUser(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -123,6 +123,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Deletes the selected user.
+     * @param id The id of the user
+     * @return ModelAndView containing the list of all users
+     */
     @RequestMapping(method = RequestMethod.GET,
             value = "/users/deleteuser/{id}")
     public ModelAndView deleteUserRedirect(@PathVariable final String id) {
@@ -132,4 +137,30 @@ public class UserController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
+    /**
+     * Maps to the add user form.
+     *
+     * @return ModelAndView containing the global school name, redirecting to the add user form
+     */
+    @RequestMapping("/users/adduser")
+    public ModelAndView addUserForm() {
+        ModelAndView mav = new ModelAndView("adduserform");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    /**
+     * Maps to the edit user form.
+     * @param id The sid of the selected user
+     * @return ModeAndView containing the selected user
+     */
+    @RequestMapping("/users/edituser/{id}")
+    public ModelAndView editUser(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("edituserform");
+        mav.addObject("user", userService.getUser(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
 }

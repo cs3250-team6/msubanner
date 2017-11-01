@@ -69,17 +69,20 @@ public class BuildingController {
 
     /**
      * Updates a building.
-     *
-     * @param building the building to be updated
      * @param id the building's id
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/buildings/updatebuilding/{id}")
-    // take request body, turn into Building instance and pass to addBuilding()
-    public void updateBuilding(@RequestBody final Building building,
-            @PathVariable final long id) {
-        // POST body should contain object being sent
+    public ModelAndView updateBuilding(@RequestParam final String buildingName,
+            @PathVariable final String id) {
+        Building building = buildingService.getBuilding(id);
+        building.setBuildingName(buildingName);
         buildingService.updateBuilding(building);
+
+        ModelAndView mav = new ModelAndView("showbuilding");
+        mav.addObject("building", buildingService.getBuilding(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -96,4 +99,32 @@ public class BuildingController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
+    /**
+     * Maps to the edit building form.
+     * @param id Id of the building
+     * @return ModelAndView containing the building object referenced by id, and the Global school name
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/buildings/editbuilding/{id}")
+    public ModelAndView editBuilding(@PathVariable final String id) {
+
+        ModelAndView mav = new ModelAndView("editbuildingform");
+        mav.addObject("building", buildingService.getBuilding(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    /**
+     * Maps to the add building form.
+     *
+     * @return the add building form string
+     */
+    @RequestMapping("/buildings/addbuilding")
+    public ModelAndView addBuildingForm() {
+        ModelAndView mav = new ModelAndView("addbuildingform");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+
 }

@@ -41,23 +41,37 @@ public class ScheduleController {
      * @param id the schedule id
      * @return the schedule
      */
-    @RequestMapping("/schedules/getSchedule/{id}")
+    @RequestMapping("/schedules/getschedule/{id}")
     public ModelAndView getSchedule(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showschedule");
         mav.addObject("schedule", scheduleService.getSchedule(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
     /**
      * Updates a schedule.
      *
-     * @param schedule the schedule to be updated
      * @param id the schedule's id
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/schedules/updateschedule/{id}")
-    public void updateSection(@RequestBody final Schedule schedule,
-                              @PathVariable final long id) {
+    public ModelAndView updateSection(@RequestParam final Building building, final Room room, final String semester,
+                                      final String startDate, final int duration, final String days,
+                                      final String hours , @PathVariable final String id) {
+        Schedule schedule = scheduleService.getSchedule(id);
+        schedule.setBuilding(building);
+        schedule.setRoom(room);
+        schedule.setDuration(duration);
+        schedule.setDays(days);
+        schedule.setHours(hours);
+        schedule.setSemester(semester);
+        schedule.setStartDate(startDate);
         scheduleService.updateSchedule(schedule);
+
+        ModelAndView mav = new ModelAndView("showschedule");
+        mav.addObject("schedule", scheduleService.getSchedule(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
     /**
      * Deletes a section.
@@ -69,5 +83,18 @@ public class ScheduleController {
     public String deleteSchedule(@PathVariable final String id) {
         scheduleService.deleteSchedule(id);
         return "redirect:/schedules/";
+    }
+
+    /**
+     * Maps to the edit schedule form.
+     * @param id the id of the schedule
+     * @return ModelAndView containing the selected schedule
+     */
+    @RequestMapping("/schedules/editschedule/{id}")
+    public ModelAndView editSchedule(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("editscheduleform");
+        mav.addObject("schedule", scheduleService.getSchedule(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 }
