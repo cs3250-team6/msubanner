@@ -7,14 +7,16 @@
             <th>Room Number</th>
             <th>Capacity</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         {{#allrooms}}
         <tr>
-            <td><a href="/rooms/{{id}}">{{id}}</a></td>
+            <td>{{id}}</td>
             <td>{{roomNumber}}</td>
             <td>{{roomCapacity}}</td>
             <td><a href="/rooms/getroom/{{id}}">View</a></td>
+            <td><a href="/rooms/editroom/{{id}}">Edit</a></td>
             <td><a href="/rooms/deleteroom/{{id}}">Delete</a> </td>
         </tr>
         {{/allrooms}}

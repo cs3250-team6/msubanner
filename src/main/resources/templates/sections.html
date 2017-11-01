@@ -7,14 +7,16 @@
             <th>Course</th>
             <th>Professor</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         <tr>
             {{#allsections}}
-            <td><a href="/sections/{{id}}">{{id}}</a></td>
+            <td>{{id}}</td>
             <td>{{course.title}}</td>
             <td>{{professor.lastName}}</td>
             <td><a href="/sections/getsection/{{id}}">View</a></td>
+            <td><a href="/sections/editsection/{{id}}">Edit</a></td>
             <td><form action="/sections/deletesection/{{id}}" method="delete"><button type="submit">Delete</button> </form></td>
         </tr>
         {{/allsections}}

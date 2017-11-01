@@ -191,6 +191,27 @@ public class Schedule {
         this.building = building;
     }
 
+    public void setDays(String days) {
+        this.days = days;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+
     /**
      * Returns the schedule hours.
      *
