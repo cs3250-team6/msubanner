@@ -82,13 +82,19 @@ public class CourseController {
     /**
      * Updates a course.
      *
-     * @param course the course to be updated
      * @param id the course's id
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/courses/updatecourse/{id}")
-    public ModelAndView updateCourse(@RequestParam final Course course,
-                              @PathVariable final String id) {
+    public ModelAndView updateCourse(@RequestParam final String title, final String description,
+                                     final int credits, final String learningObjectives, final ClassLevel prereqs,
+                                     @PathVariable final String id) {
+        Course course = courseService.getCourse(id);
+        course.setDescription(description);
+        course.setTitle(title);
+        course.setCredits(credits);
+        course.setLearningObjectives(learningObjectives);
+        course.setPrereqs(prereqs);
         courseService.updateCourse(course);
         ModelAndView mav = new ModelAndView("showcourse");
         mav.addObject("course", course);

@@ -61,7 +61,6 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
     public ModelAndView addDepartment(@RequestParam final Map<String, String> body) {
-
         System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
@@ -83,15 +82,19 @@ public class DepartmentController {
 
     /**
      * Updates a department.
-     *
-     * @param department the department to be updated
      * @param id the department's id
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/departments/updatedepartment/{id}")
-    public void updateDepartment(@RequestBody final Department department,
-            @PathVariable final long id) {
+    public ModelAndView updateDepartment(@RequestParam final String departmentName,
+            @PathVariable final String id) {
+        Department department = departmentService.getDepartment(id);
+        department.setDepartmentName(departmentName);
         departmentService.updateDepartment(department);
+        ModelAndView mav = new ModelAndView("showdepartment");
+        mav.addObject("department", departmentService.getDepartment(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -105,6 +108,14 @@ public class DepartmentController {
         departmentService.deleteDepartment(id);
         ModelAndView mav = new ModelAndView("departments");
         mav.addObject("alldepartments", departmentService.getAllDepartments());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    @RequestMapping("/departments/editdepartment/{id}")
+    public ModelAndView editDepartment(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("editdepartmentform");
+        mav.addObject("department", departmentService.getDepartment(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }

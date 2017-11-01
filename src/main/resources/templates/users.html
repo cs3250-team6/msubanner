@@ -7,14 +7,16 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         {{#allusers}}
         <tr>
-            <td><a href="/users/{{id}}">{{id}}</a></td>
+            <td>{{id}}</td>
             <td>{{firstName}}</td>
             <td>{{lastName}}</td>
             <td><a href="/users/getuser/{{id}}">View</a></td>
+            <td><a href="/users/edituser/{{id}}">Edit</a></td>
             <td><a href="/users/deleteuser/{{id}}">Delete</a> </td>
         </tr>
         {{/allusers}}

@@ -1,8 +1,8 @@
 {{#layout}}
+{{#user}}
 <div class="container">
     <h1>User Input Form (Currently Working)</h1>
-    <form action="#" method="post">
-        {{#user}}
+    <form action="/users/updateuser/{{id}}" method="get">
         <p>First Name: <input type="text" name="firstName" value="{{firstName}}"/></p>
         <p>Last Name: <input type="text" name="lastName" value="{{lastName}}" /></p>
         {{/user}}

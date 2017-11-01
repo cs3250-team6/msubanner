@@ -1,15 +1,27 @@
 {{#layout}}
+{{#section}}
 <div class="container">
-    <h1>Section Input Form (Not Working)</h1>
-    <form action="#" method="post">
-        <p>Course: <select name="course">
-            {{#allcourses}}
-            <option value="{{title}}" />
-            {{/allcourses}}
-        </select>
+    <h1>Section Input Form (Working)</h1>
+    <form action="/sections/updatesection/{{id}}" method="get">
+        <p>Course:
+            <select name="course">
+                <option value="{{id}}" >{{course.title}}</option>
+                {{#allcourses}}
+                <option value="{{id}}" >{{title}}</option>
+                {{/allcourses}}
+            </select>
+        </p>
+        <p>Professor:
+            <select name="professor">
+                <option value="{{id}}" >{{professor.lastName}}, {{professor.firstName}}</option>
+                {{#allprofs}}
+                <option value="{{id}}" >{{lastName}}, {{firstName}}</option>
+                {{/allprofs}}
+            </select>
         </p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>
+{{/section}}
 {{/layout}}
 {{>layout}}

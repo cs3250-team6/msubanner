@@ -2,12 +2,12 @@
 {{#course}}
 <div class="container">
     <h1>Course Input Form (Currently Working)</h1>
-    <form action="/courses/updatecourse/{{id}}" method="put">
-        <p>Course Title: <input type="text" name="courseTitle" value="{{title}}"/></p>
-        <p>Course Description: <input type="text" name="courseDescription" value="{{description}}"></p>
-        <p>Number of Credits: <input type="number" name="courseCredits"value="{{credits}}" /></p>
-        <p>Learning Objectives: <input type="text" name="courseLearningObjectives" value="{{learningObjectives}}"/></p>
-        <p>Prerequisites: <select name="coursePrereqs">
+    <form action="/courses/updatecourse/{{id}}" method="get">
+        <p>Course Title: <input type="text" name="title" value="{{title}}"/></p>
+        <p>Course Description: <input type="text" name="description" value="{{description}}"></p>
+        <p>Number of Credits: <input type="number" name="credits"value="{{credits}}" /></p>
+        <p>Learning Objectives: <input type="text" name="learningObjectives" value="{{learningObjectives}}"/></p>
+        <p>Prerequisites: <select name="prereqs">
             <option value="FRESHMAN">Freshman</option>
             <option value="SOPHOMORE">Sophomore</option>
             <option value="JUNIOR">Junior</option>

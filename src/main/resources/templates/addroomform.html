@@ -2,6 +2,11 @@
 <div class="container">
     <h1>Room Input Form (Currently Working)</h1>
     <form action="#" method="post">
+        <p>Building: <select name="building">
+            {{#allbuildings}}
+            <option value="{{id}}">{{buildingName}}</option>
+            {{/allbuildings}}
+        </select></p>
         <p>Room Number: <input type="number" name="roomNumber"/></p>
         <p>Room Capacity: <input type="number" name="roomCapacity"/></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

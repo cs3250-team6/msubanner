@@ -12,19 +12,21 @@
             <th>Days</th>
             <th>Hours</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         {{#allschedules}}
         <tr>
-            <td><a href="/schedules/{{id}}">{{id}}</a></td>
-            <td>{{room}}</td>
-            <td>{{building}}</td>
+            <td>{{id}}</td>
+            <td>{{room.roomNumber}}</td>
+            <td>{{building.buildingName}}</td>
             <td>{{semester}}</td>
             <td>{{startDate}}</td>
             <td>{{duration}}</td>
             <td>{{days}}</td>
             <td>{{hours}}</td>
             <td><a href="/schedules/getschedule/{{id}}">View</a></td>
+            <td><a href="/schedules/editschedule/{{id}}">Edit</a></td>
             <td><a href="/schedules/deleteschedule/{{id}}">Delete</a> </td>
         </tr>
         {{/allschedules}}

@@ -50,16 +50,6 @@ class HomeController {
     }
 
     /**
-     * Maps to the add user form.
-     *
-     * @return the add user form string
-     */
-    @RequestMapping("/users/adduser")
-    String addUserForm() {
-        return "adduserform";
-    }
-
-    /**
      * Maps to the add department form.
      *
      * @return the add department form string
@@ -113,25 +103,4 @@ class HomeController {
 
         return mav;
     }
-
-    /**
-     * Maps to the add building form.
-     *
-     * @return the add building form string
-     */
-    @RequestMapping("/buildings/addbuilding")
-    String addBuildingForm() {
-        return "addbuildingform";
-    }
-
-    /**
-     * Maps to the add room form.
-     *
-     * @return the add room form string
-     */
-    @RequestMapping("/rooms/addroom")
-    String addRoomForm() {
-        return "addroomform";
-    }
-
 }
