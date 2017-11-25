@@ -114,4 +114,22 @@ public class DaysTest {
 
         assertEquals(daysToTest, days.getDayList());
     }
+
+    @Test
+    public void testDaysToString() {
+        Days days = new Days();
+        days.addToDayList(Day.SATURDAY);
+        days.addToDayList(Day.SUNDAY);
+        days.addToDayList(Day.MONDAY);
+        days.addToDayList(Day.TUESDAY);
+
+        HashSet<Day> daysToTest = new HashSet<Day>();
+        daysToTest.add(Day.SATURDAY);
+        daysToTest.add(Day.SUNDAY);
+        daysToTest.add(Day.TUESDAY);
+
+        days.removeDayFromList(Day.MONDAY);
+
+        assertEquals("Sunday, Tuesday, Saturday", days.toString());
+    }
 }

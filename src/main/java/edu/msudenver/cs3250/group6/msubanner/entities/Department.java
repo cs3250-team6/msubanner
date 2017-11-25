@@ -75,4 +75,45 @@ public class Department {
     }
 
     // TODO: add setters and equals, hashcode, tostring for testing
+
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Department that = (Department) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        return myDepartmentName != null ? myDepartmentName.equals(that.myDepartmentName) : that.myDepartmentName == null;
+    }
+
+    /**
+     * Generates hashcode for Department object
+     *
+     * @return int value of hashcode
+     */
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (myDepartmentName != null ? myDepartmentName.hashCode() : 0);
+        return result;
+    }
+
+    /**
+     * Returns a String for Department
+     *
+     * @return String of Department values
+     */
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id='" + id + '\'' +
+                ", myDepartmentName='" + myDepartmentName + '\'' +
+                '}';
+    }
 }

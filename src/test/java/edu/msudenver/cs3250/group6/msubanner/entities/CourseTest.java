@@ -1,5 +1,6 @@
-package edu.msudenver.cs3250.group6.msubanner;
+package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 
 import static org.junit.Assert.assertEquals;

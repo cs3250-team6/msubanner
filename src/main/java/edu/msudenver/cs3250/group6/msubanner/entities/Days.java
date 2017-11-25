@@ -146,7 +146,7 @@ public class Days {
      *
      * @param setToCompare the days list to be compared against the calling days
      *        list
-     * @return if there is a conflict between days
+     * @return true if there is a conflict between days
      */
     public boolean hasConflict(final HashSet<Day> setToCompare) {
         for (Day day : dayList) {
@@ -157,6 +157,11 @@ public class Days {
         return false;
     }
 
+    /**
+     * Returns a string of the values in the day list
+     *
+     * @return a String of Days
+     */
     @Override
     public String toString() {
         String output = dayList.toString();
