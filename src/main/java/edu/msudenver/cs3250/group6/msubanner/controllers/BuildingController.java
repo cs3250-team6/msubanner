@@ -81,7 +81,7 @@ public class BuildingController {
         buildingService.updateBuilding(building);
 
         ModelAndView mav = new ModelAndView("showbuilding");
-        mav.addObject("building", buildingService.getBuilding(id));
+        mav.addObject("building", building);
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
