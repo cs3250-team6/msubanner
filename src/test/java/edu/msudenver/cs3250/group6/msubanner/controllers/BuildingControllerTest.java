@@ -1,77 +1,78 @@
-/*package edu.msudenver.cs3250.group6.msubanner.controllers;
+package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
+import edu.msudenver.cs3250.group6.msubanner.controllers.BuildingController;
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.Test;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class BuildingControllerTest {
 
-    private MockMvc mockMvc;
-
     @Autowired
-    private BuildingService buildingServiceMock;
+    private BuildingController controller;
 
-    //Add WebApplicationContext field here
-
-    //The setUp() method is omitted.
+    @Mock
+    private Model mockModel;
 
     @Test
-    public void findAll_ShouldAddBuildingEntriesToModelAndRenderBuildingListView() throws Exception {
-        Building first = new BuildingBuilder()
-                .id(1L)
-                .description("Lorem ipsum")
-                .title("Foo")
-                .build();
+    public void contextLoads() throws Exception {
+        assertThat(controller).isNotNull();
+    }
 
-        Building second = new BuildingBuilder()
-                .id(2L)
-                .description("Lorem ipsum")
-                .title("Bar")
-                .build();
+    @Test
+    public void testGetAllBuildings() {
+        ModelAndView ret = controller.getAllBuildings();
+        assertThat("buildings".equals(ret));
+    }
 
-        when(buildingServiceMock.findAll()).thenReturn(Arrays.asList(first, second));
+    @Test
+    public void testBuildingById() {
+        ModelAndView mav = controller.getBuilding("0");
+        assertThat("showbuilding".equals(mav));
+    }
 
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("building/list"))
-                .andExpect(forwardedUrl("/WEB-INF/jsp/building/list.jsp"))
-                .andExpect(model().attribute("buildings", hasSize(2)))
-                .andExpect(model().attribute("buildings", hasItem(
-                        allOf(
-                                hasProperty("id", is(1L)),
-                                hasProperty("description", is("Lorem ipsum")),
-                                hasProperty("title", is("Foo"))
-                        )
-                )))
-                .andExpect(model().attribute("buildings", hasItem(
-                        allOf(
-                                hasProperty("id", is(2L)),
-                                hasProperty("description", is("Lorem ipsum")),
-                                hasProperty("title", is("Bar"))
-                        )
-                )));
+    @Test
+    public void testAddBuilding() {
+        ModelAndView mav = controller.addBuilding("Name");
+        assertThat("showbuilding".equals(mav));
+    }
 
-        verify(buildingServiceMock, times(1)).findAll();
-        verifyNoMoreInteractions(buildingServiceMock);
-    }*/
+
+    @Test
+    public void testUpdateBuilding() {
+        ModelAndView mav = controller.updateBuilding("0", "1488");
+        controller.updateBuilding("Test", "1488");
+        assertThat(mav.getViewName().equals("showbuilding"));
+    }
+
+
+
+    @Test
+    public void testDeleteBuilding() {
+        ModelAndView mav = controller.deleteBuilding("0");
+        assertThat("buildings".equals(mav));
+    }
+
+    @Test
+    public void testEditBuilding() {
+        ModelAndView mav = controller.editBuilding("0");
+        assertThat("editbuildingform".equals(mav));
+
+    }
+
+    @Test
+    public void testAddBuildingForm() {
+        ModelAndView mav = controller.addBuildingForm();
+        assertThat("addbuildingform".equals(mav));
+    }
+}
