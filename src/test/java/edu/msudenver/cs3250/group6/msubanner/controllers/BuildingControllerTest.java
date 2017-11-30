@@ -18,9 +18,6 @@ public class BuildingControllerTest {
     @Autowired
     private BuildingController controller;
 
-    @Mock
-    private Model mockModel;
-
     @Test
     public void contextLoads() throws Exception {
         assertThat(controller).isNotNull();
